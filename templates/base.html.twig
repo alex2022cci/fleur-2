@@ -1,19 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">        
+        <meta name="robots" content="noindex, follow" />
+        <meta name="description" content="{% block description %}Welcome!{% endblock %}">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon" />
+        
         {{ encore_entry_link_tags('app') }}
         {% block stylesheets %}{% endblock %}
-
-        
+        <!-- Font Icons css -->
+        <link rel="stylesheet" href="css/font-icons.css">
+        <!-- plugins css -->
+        <link rel="stylesheet" href="css/plugins.css">
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="css/style.css">
+        <!-- Responsive css -->
+        <link rel="stylesheet" href="css/responsive.css">
 
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+        <div class="body-wrapper">
+            {% include '_partials/ltn__header-top-area.html.twig' %}
+            {% include '_partials/show-card-right.html.twig' %}
+            {% include '_partials/menu-responsive.html.twig' %}
+            {% block body %}{% endblock %}
+            {% include '_partials/footers.html.twig' %}
+
+            {% include '_partials/add-to-cart.html.twig' %}
+            {% include '_partials/wishlist.html.twig' %}
+            {% include '_partials/quick-view.html.twig' %}
+        </div>
+        
+        <!-- preloader area start -->
+        <div class="preloader d-none" id="preloader">
+            <div class="preloader-inner">
+                <div class="spinner">
+                    <div class="dot1"></div>
+                    <div class="dot2"></div>
+                </div>
+            </div>
+        </div>
+        <!-- preloader area end -->
 
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
+        <!-- All JS Plugins -->
+        <script src="js/plugins.js"></script>
+        <!-- Main JS -->
+        <script src="js/main.js"></script>
     </body>
 </html>

@@ -12,13 +12,13 @@
         {{ encore_entry_link_tags('app') }}
         {% block stylesheets %}{% endblock %}
         <!-- Font Icons css -->
-        <link rel="stylesheet" href="css/font-icons.css">
+        <link rel="stylesheet" href="{{ asset('css/font-icons.css') }}">
         <!-- plugins css -->
-        <link rel="stylesheet" href="css/plugins.css">
+        <link rel="stylesheet" href=" {{ asset('css/plugins.css') }} ">
         <!-- Main Stylesheet -->
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <!-- Responsive css -->
-        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
     </head>
     <body>
@@ -52,8 +52,8 @@
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
         <!-- All JS Plugins -->
-        <script src="js/plugins.js"></script>
+        <script src="{{ asset('js/plugins.js') }}"></script>
         <!-- Main JS -->
-        <script src="js/main.js"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
     </body>
 </html>

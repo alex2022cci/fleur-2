@@ -1,0 +1,72 @@
+                                {{ form_start(registrationForm) }}
+                                    <h6>Personal Information</h6>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-item input-item-name ltn__custom-icon">
+                                                {{ form_widget(registrationForm.FirstName) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-item input-item-name ltn__custom-icon">
+                                                {{ form_widget(registrationForm.LastName) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-item input-item-email ltn__custom-icon">
+                                                {{ form_widget(registrationForm.email) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-item input-item-phone ltn__custom-icon">
+                                                {{ form_widget(registrationForm.Mobile) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-item input-item-website ltn__custom-icon">
+                                                {{ form_widget(registrationForm.plainPassword) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                
+                                        <div class="col-lg-12 col-md-12">
+                                            <h6>Address</h6>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-item">
+                                                        <input type="text" placeholder="House number and street name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-item">
+                                                        <input type="text" placeholder="Apartment, suite, unit etc. (optional)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6">
+                                            <h6>Town / City</h6>
+                                            <div class="input-item">
+                                                <input type="text" placeholder="City">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6">
+                                            <h6>State </h6>
+                                            <div class="input-item">
+                                                <input type="text" placeholder="State">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6">
+                                            <h6>Zip</h6>
+                                            <div class="input-item">
+                                                <input type="text" placeholder="Zip">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <label class="input-info-save mb-0">
+                                            {{ form_row(registrationForm.agreeTerms) }}
+                                        </label>
+                                    </p>
+
+                                {{ form_end(registrationForm) }}

@@ -38,16 +38,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $FirstName = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $MiddleName = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $LastName = null;
 
-    #[ORM\Column(length: 15, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $Mobile = null;
 
     #[ORM\Column(length: 255, nullable: true)]

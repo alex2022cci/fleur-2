@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -61,6 +63,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Profile = null;
+
+    #[ORM\OneToMany(mappedBy: 'UserId', targetEntity: Product::class)]
+    private Collection $Products;
+
+    public function __construct()
+    {
+        $this->Products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -236,6 +246,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfile(?string $Profile): self
     {
         $this->Profile = $Profile;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->Products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->Products->contains($product)) {
+            $this->Products->add($product);
+            $product->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->Products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getUserId() === $this) {
+                $product->setUserId(null);
+            }
+        }
 
         return $this;
     }

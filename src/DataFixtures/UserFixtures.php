@@ -22,23 +22,29 @@ class UserFixtures extends Fixture
     {
         $faker = Faker\Factory::create();
 
+        $user = new User();
+           
+        $user->setEmail( 'guillaume@gmail.com' );
+        $user->setPassword( $this->encoder->hashPassword( $user, '123456789' ) );
+        $user->setIsVerified( '1' );
+        $user->setRoles( array('ROLE_ADMIN') );
+        $user->setFirstName( 'Guillaume' );
+        $user->setMiddleName( 'Auxioma' );
+        $user->setLastName( 'DEVAUX' );
+        $user->setMobile( '0766068003' );
+        $user->setVendor( '1' );
+        $user->setRegistredAt(new \DateTimeImmutable);
+        $user->setLastLogin(new \DateTimeImmutable);
+        $user->setIntro('1');
+        $user->setProfile('Je suis le créateur de ce site');
+        // je vais enregister de maniere aléatoire des utilisateurs.
+        $this->addReference('user_' . '0', $user);
+
+        $manager->persist($user);
+
         for ( $i = 0; $i <= 20; $i++) {
             $user = new User();
-            if ( $i == 0) {
-                $user->setEmail( 'guillaume@gmail.com' );
-                $user->setPassword( $this->encoder->hashPassword( $user, '123456789' ) );
-                $user->setIsVerified( '1' );
-                $user->setRoles( array('ROLE_ADMIN') );
-                $user->setFirstName( 'Guillaume' );
-                $user->setMiddleName( 'Auxioma' );
-                $user->setLastName( 'DEVAUX' );
-                $user->setMobile( '0766068003' );
-                $user->setVendor( '1' );
-                $user->setRegistredAt(new \DateTimeImmutable);
-                $user->setLastLogin(new \DateTimeImmutable);
-                $user->setIntro('1');
-                $user->setProfile('Je suis le créateur de ce site');
-            }
+
             $IsVerified = rand(0,1);
             $user->setEmail( $faker->email() );
             $user->setPassword( $this->encoder->hashPassword( $user, '123456789' ) );
@@ -54,10 +60,6 @@ class UserFixtures extends Fixture
             $user->setLastLogin(new \DateTimeImmutable);
             $user->setIntro('1');
             $user->setProfile('88');
-
-
-            // je vais enregister de maniere aléatoire des utilisateurs.
-            $this->addReference('user_' . $i, $user);
 
             $manager->persist($user);
         }

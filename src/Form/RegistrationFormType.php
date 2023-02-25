@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -36,14 +35,9 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'email address'
                 ]
-            ]) 
-            ->add('Mobile', TelType::class, [
-                'attr' => [
-                    'placeholder' => 'phone number'
-                ]
-            ]) 
-            
+            ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => false,
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -79,13 +73,6 @@ class RegistrationFormType extends AbstractType
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-            ])
-
-            ->add('save', SubmitType::class, [
-                'label' => 'Register',
-                'attr' => [
-                    'class' => 'btn theme-btn-1 btn-effect-1 text-uppercase'
-                ]
             ])
         ;
     }

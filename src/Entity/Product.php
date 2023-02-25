@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -65,6 +67,14 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'Products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $UserId = null;
+
+    #[ORM\OneToMany(mappedBy: 'Product', targetEntity: Pictures::class)]
+    private Collection $Pictures;
+
+    public function __construct()
+    {
+        $this->Pictures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -271,6 +281,36 @@ class Product
     public function setUserId(?User $UserId): self
     {
         $this->UserId = $UserId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pictures>
+     */
+    public function getPictures(): Collection
+    {
+        return $this->Pictures;
+    }
+
+    public function addPicture(Pictures $picture): self
+    {
+        if (!$this->Pictures->contains($picture)) {
+            $this->Pictures->add($picture);
+            $picture->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Pictures $picture): self
+    {
+        if ($this->Pictures->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getProduct() === $this) {
+                $picture->setProduct(null);
+            }
+        }
 
         return $this;
     }

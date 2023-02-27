@@ -22,7 +22,7 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
             $UpdatedAt  = new DateTimeImmutable;
             $UpdatedAt = $UpdatedAt->modify('-' . $CreationDate . ' day');
             
-            $img = rand(1, 12) . '.png';
+            $img = rand(1, 12) . '.jpg';
 
             $Pictures = new Pictures();
             $Pictures->setAlt($faker->sentence(3));

@@ -54,6 +54,8 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
 
             $product->setUserId($userId);
 
+            $this->addReference('product_' . $i, $product);
+            
             $manager->persist($product);
         }
 

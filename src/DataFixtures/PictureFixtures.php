@@ -3,8 +3,6 @@
 namespace App\DataFixtures;
 
 use Faker;
-use DateTimeImmutable;
-use App\Entity\Product;
 use App\Entity\Pictures;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -16,11 +14,7 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i <= 150; $i++) {
-
-            $CreationDate = rand(1,365);
-            $UpdatedAt  = new DateTimeImmutable;
-            $UpdatedAt = $UpdatedAt->modify('-' . $CreationDate . ' day');
+        for ($i = 0; $i <= 4000; $i++) {
             
             $img = rand(1, 12) . '.jpg';
 
@@ -28,7 +22,7 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
             $Pictures->setAlt($faker->sentence(3));
             $Pictures->setImageName($img);
             $Pictures->setImageSize($i);
-            $Pictures->setProduct($this->getReference('product_' . rand(0, 50)));
+            $Pictures->setProduct($this->getReference('product_' . rand(0, 100)));
 
             $manager->persist($Pictures);
         }

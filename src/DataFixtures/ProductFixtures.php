@@ -15,7 +15,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i <= 150; $i++) {
+        for ($i = 0; $i <= 100; $i++) {
             $userId = $this->getReference('user_' . '0');
 
             // Je dchoisie des chiffre au hasard pour les date de création de produit

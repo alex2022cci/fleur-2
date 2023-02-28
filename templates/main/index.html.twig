@@ -24,13 +24,23 @@
 
             // je vais l'envoyer en AJAX
             $.ajax({
-                url: "{{ path('app_modal_addtocart') }}",
+                url: "/ajax/addtocart",
                 type: "GET",
                 data: {id: id},
                 dataType: 'json',
                 async: true,
-                success: function(data){
-                    console.log(data);
+                success: function(data, status){
+                    // 
+
+                    let title = data.Titre;
+                    let image = data.image;
+                    let slug  = data.Slug;
+
+                    console.log( $(".InjectTitle").text(title) );
+
+                    // j'inject le let title dans le html
+                    $(".InjectTitle").text(title);
+                    
                 }
             });
         });

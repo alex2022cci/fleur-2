@@ -71,6 +71,7 @@ class Product
     #[ORM\OneToMany(mappedBy: 'Product', targetEntity: Pictures::class)]
     private Collection $Pictures;
 
+
     public function __construct()
     {
         $this->Pictures = new ArrayCollection();

@@ -33,66 +33,41 @@
                             <h4 class="title-2">Billing Details</h4>
                             <div class="ltn__checkout-single-content-info">
                                 {{ form_start(Order) }}
-                                    <h6>Personal Information</h6>
+                                    <h6>Personal Information</h6> 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" name="ltn__name" placeholder="First name">
+                                                {{ form_widget(Order.firstName) }}
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" name="ltn__lastname" placeholder="Last name">
+                                                {{ form_widget(Order.lastName) }}
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-item input-item-email ltn__custom-icon">
-                                                <input type="email" name="ltn__email" placeholder="email address">
+                                                {{ form_widget(Order.mobile) }}
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-item input-item-phone ltn__custom-icon">
-                                                <input type="text" name="ltn__phone" placeholder="phone number">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-website ltn__custom-icon">
-                                                <input type="text" name="ltn__company" placeholder="Company name (optional)">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-website ltn__custom-icon">
-                                                <input type="text" name="ltn__phone" placeholder="Company address (optional)">
+                                                {{ form_widget(Order.middleName) }}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-6">
-                                            <h6>Country</h6>
-                                            <div class="input-item">
-                                                <select class="nice-select">
-                                                    <option>Select Country</option>
-                                                    <option>Australia</option>
-                                                    <option>Canada</option>
-                                                    <option>China</option>
-                                                    <option>Morocco</option>
-                                                    <option>Saudi Arabia</option>
-                                                    <option>United Kingdom (UK)</option>
-                                                    <option>United States (US)</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12 col-md-12">
                                             <h6>Address</h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="input-item">
-                                                        <input type="text" placeholder="House number and street name">
+                                                        {{ form_widget(Order.line1) }}
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="input-item">
-                                                        <input type="text" placeholder="Apartment, suite, unit etc. (optional)">
+                                                        {{ form_widget(Order.line2) }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -100,26 +75,25 @@
                                         <div class="col-lg-4 col-md-6">
                                             <h6>Town / City</h6>
                                             <div class="input-item">
-                                                <input type="text" placeholder="City">
+                                                {{ form_widget(Order.city) }}
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6">
                                             <h6>State </h6>
                                             <div class="input-item">
-                                                <input type="text" placeholder="State">
+                                                {{ form_widget(Order.province) }}
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6">
                                             <h6>Zip</h6>
                                             <div class="input-item">
-                                                <input type="text" placeholder="Zip">
+                                                {{ form_widget(Order.country) }}
                                             </div>
                                         </div>
                                     </div>
-                                    <p><label class="input-info-save mb-0"><input type="checkbox" name="agree"> Create an account?</label></p>
                                     <h6>Order Notes (optional)</h6>
                                     <div class="input-item input-item-textarea ltn__custom-icon">
-                                        <textarea name="ltn__message" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        {{ form_widget(Order.content) }}
                                     </div>
                                     <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Paiement</button>
                                     {{ form_end(Order) }}

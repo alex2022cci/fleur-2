@@ -24,7 +24,6 @@ class AddtocartServices
         }
         $this->getSession()->set('cart', $cart);
 
-        // pensez a mettre en BDD le panier de l'utilisateur
     }
 
     private function getSession(): SessionInterface

@@ -40,54 +40,46 @@
                                     <th class="cart-product-subtotal">Subtotal</th>
                                 </thead> -->
                                 <tbody>
-                                <tr>
-                                    <td class="cart-product-remove">x</td>
-                                    <td class="cart-product-image">
-                                        <a href="product-details.html"><img src="img/product/1.png" alt="#"></a>
-                                    </td>
-                                    <td class="cart-product-info">
-                                        <h4><a href="product-details.html">Brake Conversion Kit</a></h4>
-                                    </td>
-                                    <td class="cart-product-price">$149.00</td>
-                                    <td class="cart-product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                        </div>
-                                    </td>
-                                    <td class="cart-product-subtotal">$298.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="cart-product-remove">x</td>
-                                    <td class="cart-product-image">
-                                        <a href="product-details.html"><img src="img/product/2.png" alt="#"></a>
-                                    </td>
-                                    <td class="cart-product-info">
-                                        <h4><a href="product-details.html">OE Replica Wheels</a></h4>
-                                    </td>
-                                    <td class="cart-product-price">$85.00</td>
-                                    <td class="cart-product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                        </div>
-                                    </td>
-                                    <td class="cart-product-subtotal">$170.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="cart-product-remove">x</td>
-                                    <td class="cart-product-image">
-                                        <a href="product-details.html"><img src="img/product/3.png" alt="#"></a>
-                                    </td>
-                                    <td class="cart-product-info">
-                                        <h4><a href="product-details.html">Wheel Bearing Retainer</a></h4>
-                                    </td>
-                                    <td class="cart-product-price">$75.00</td>
-                                    <td class="cart-product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                        </div>
-                                    </td>
-                                    <td class="cart-product-subtotal">$150.00</td>
-                                </tr>
+                               
+                                {% if items | length > 0 %}
+                                    {% for item in items %}
+                                        <tr>
+                                        <td class="cart-product-remove">x</td>
+                                        <td class="cart-product-image">
+                                            <a href="product-details.html">
+                                                {% for image in item.produit.Pictures %}
+                                                    {% if loop.index0 == 0 %}
+                                                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="#">
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </a>
+                                        </td>
+                                        <td class="cart-product-info">
+                                            <h4>
+                                                <a href="product-details.html">
+                                                    {{ item.produit.Title }}
+                                                </a>
+                                            </h4>
+                                        </td>
+                                        <td class="cart-product-price">
+                                            ${{ item.produit.Price }}
+                                        </td>
+                                        <td class="cart-product-quantity">
+                                            <div class="cart-plus-minus">
+                                                <input type="text" value="{{ item.quantity }}" name="qtybutton" class="cart-plus-minus-box">
+                                            </div>
+                                        </td>
+                                        <td class="cart-product-subtotal">
+                                            ${{ item.produit.Price * item.quantity }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6" class="text-center">No items in cart</td>
+                                    </tr>
+                                {% endif %}
+
                                 <tr class="cart-coupon-row">
                                     <td colspan="6">
                                         <div class="cart-coupon">
@@ -108,19 +100,25 @@
                                 <tbody>
                                 <tr>
                                     <td>Cart Subtotal</td>
-                                    <td>$618.00</td>
+                                    <td>${{ total }}</td>
                                 </tr>
                                 <tr>
                                     <td>Shipping and Handing</td>
-                                    <td>$15.00</td>
+                                    {% if total > 100 %}
+                                        {% set shipping = 0 %}
+                                        <td>${{ shipping }}</td>
+                                    {% else %}
+                                        {% set shipping = 15 %}
+                                    <td>${{ shipping}}</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
-                                    <td>Vat</td>
-                                    <td>$00.00</td>
+                                    <td>Montant HT</td>
+                                    <td>${{ total / 1.2 }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Order Total</strong></td>
-                                    <td><strong>$633.00</strong></td>
+                                    <td><strong>${{ total + shipping }}</strong></td>
                                 </tr>
                                 </tbody>
                             </table>

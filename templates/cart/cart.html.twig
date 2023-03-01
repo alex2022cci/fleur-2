@@ -40,7 +40,7 @@
                                     <th class="cart-product-subtotal">Subtotal</th>
                                 </thead> -->
                                 <tbody>
-                               
+
                                 {% if items | length > 0 %}
                                     {% for item in items %}
                                         <tr>
@@ -123,7 +123,7 @@
                                 </tbody>
                             </table>
                             <div class="btn-wrapper text-right">
-                                <a href="checkout.html" class="theme-btn-1 btn btn-effect-1">Proceed to checkout</a>
+                                <a href="{{ path('profile_chekout') }}" class="theme-btn-1 btn btn-effect-1">Proceed to checkout</a>
                             </div>
                         </div>
                     </div>

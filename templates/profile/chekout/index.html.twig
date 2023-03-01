@@ -32,7 +32,7 @@
                         <div class="ltn__checkout-single-content mt-50">
                             <h4 class="title-2">Billing Details</h4>
                             <div class="ltn__checkout-single-content-info">
-                                <form action="#" >
+                                {{ form_start(Order) }}
                                     <h6>Personal Information</h6>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -121,12 +121,13 @@
                                     <div class="input-item input-item-textarea ltn__custom-icon">
                                         <textarea name="ltn__message" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div>
-
-                                </form>
+                                    <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Paiement</button>
+                                    {{ form_end(Order) }}
                             </div>
                         </div>
                     </div>
                 </div>
+                {#
                 <div class="col-lg-6">
                     <div class="ltn__checkout-payment-method mt-50">
                         <h4 class="title-2">Payment Method</h4>
@@ -204,6 +205,7 @@
                         </table>
                     </div>
                 </div>
+                #}
             </div>
         </div>
     </div>

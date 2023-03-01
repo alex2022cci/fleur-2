@@ -2,6 +2,8 @@
 
 namespace App\Controller\Profile;
 
+use App\Entity\Order;
+use App\Form\OrderType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,8 +15,12 @@ class ChekoutController extends AbstractController
     #[isGranted('ROLE_USER')]
     public function index(): Response
     {
+        // creation du Formulaire
+        $Order = new Order();
+        $form = $this->createForm(OrderType::class, $Order);
+
         return $this->render('profile/chekout/index.html.twig', [
-            'controller_name' => 'ChekoutController',
+            'Order' => $form->createView(),
         ]);
     }
 }

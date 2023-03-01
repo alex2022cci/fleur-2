@@ -60,24 +60,29 @@ class Order
     private ?string $lastName = null;
 
     #[ORM\Column(length: 15)]
+    #[Assert\NotBlank]
     private ?string $mobile = null;
 
     #[ORM\Column(length: 50)]
     private ?string $email = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
     private ?string $line1 = null;
 
     #[ORM\Column(length: 50)]
     private ?string $line2 = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
     private ?string $city = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
     private ?string $province = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
     private ?string $country = null;
 
     #[ORM\Column]

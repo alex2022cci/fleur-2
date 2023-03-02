@@ -44,11 +44,13 @@
                                         <div class="col-md-6">
                                             <div class="input-item input-item-name ltn__custom-icon">
                                                 {{ form_widget(Order.lastName) }}
+                                                {{ form_errors(Order.lastName) }}
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-item input-item-email ltn__custom-icon">
                                                 {{ form_widget(Order.mobile) }}
+                                                {{ form_errors(Order.mobile) }}
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -64,6 +66,7 @@
                                                 <div class="col-md-6">
                                                     <div class="input-item">
                                                         {{ form_widget(Order.line1) }}
+                                                        {{ form_errors(Order.line1) }}
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -77,24 +80,28 @@
                                             <h6>Town / City</h6>
                                             <div class="input-item">
                                                 {{ form_widget(Order.city) }}
+                                                {{ form_errors(Order.city) }}
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6">
                                             <h6>State </h6>
                                             <div class="input-item">
                                                 {{ form_widget(Order.province) }}
+                                                {{ form_errors(Order.province) }}
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6">
                                             <h6>Country</h6>
                                             <div class="input-item">
                                                 {{ form_widget(Order.country) }}
+                                                {{ form_errors(Order.country) }}
                                             </div>
                                         </div>
                                     </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
                                         {{ form_widget(Order.Zip) }}
+                                        {{ form_errors(Order.Zip) }}
                                     </div>
                                 </div>
                                     <h6>Order Notes (optional)</h6>

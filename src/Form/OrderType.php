@@ -110,11 +110,11 @@ class OrderType extends AbstractType
                         'message' => 'Please enter your postal code',
                     ]),
                     new  \Symfony\Component\Validator\Constraints\Length([
-                        'min' => 5,
-                        'max' => 5,
+                        'min' => 3,
+                        'max' => 10,
                         'minMessage' => 'Your postal code must be at least {{ limit }} characters long',
+                        'maxMessage' => 'Your postal code cannot be longer than {{ limit }} characters',
                     ])
-
                 ]
             ])
         ;

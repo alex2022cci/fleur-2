@@ -32,12 +32,13 @@
                         <div class="ltn__checkout-single-content mt-50">
                             <h4 class="title-2">Billing Details</h4>
                             <div class="ltn__checkout-single-content-info">
-                                {{ form_start(Order) }}
+                                {{ form_start(Order, {attr: {'novalidate': 'novalidate'}} ) }}
                                     <h6>Personal Information</h6> 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-item input-item-name ltn__custom-icon">
                                                 {{ form_widget(Order.firstName) }}
+                                                {{ form_errors(Order.firstName) }}
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -85,12 +86,17 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6">
-                                            <h6>Zip</h6>
+                                            <h6>Country</h6>
                                             <div class="input-item">
                                                 {{ form_widget(Order.country) }}
                                             </div>
                                         </div>
                                     </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        {{ form_widget(Order.Zip) }}
+                                    </div>
+                                </div>
                                     <h6>Order Notes (optional)</h6>
                                     <div class="input-item input-item-textarea ltn__custom-icon">
                                         {{ form_widget(Order.content) }}

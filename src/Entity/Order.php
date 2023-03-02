@@ -15,40 +15,40 @@ class Order
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $token = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $status = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $subTotal = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $itemDiscount = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $tax = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $shipping = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $total = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $promo = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $discount = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $grandTotal = null;
 
     #[ORM\Column(length: 50)]
     private ?string $firstName = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $middleName = null;
 
     #[ORM\Column(length: 50)]
@@ -57,13 +57,13 @@ class Order
     #[ORM\Column(length: 15)]
     private ?string $mobile = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 50)]
     private ?string $line1 = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $line2 = null;
 
     #[ORM\Column(length: 50)]
@@ -81,11 +81,17 @@ class Order
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
     #[ORM\Column(length: 10)]
     private ?string $Zip = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

@@ -1,7 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Paiement{% endblock %}
 
 {% block body %}
-
+    <div class="ltn__checkout-area mb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ltn__checkout-payment-method mt-50">
+                        <h4 class="title-2">Payment Method</h4>
+                        <div id="checkout_accordion_1">
+                            <!-- card -->
+                            <div class="card">
+                                <h5 class="collapsed ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-1" aria-expanded="true">
+                                    Check payments
+                                </h5>
+                                <div id="faq-item-2-1" class="collapse show" data-bs-parent="#checkout_accordion_1">
+                                    <div class="card-body">
+                                        <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_start(form) }}
+                        {{ form_widget(form.submit) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping-cart-total mt-50">
+                        <h4 class="title-2">Cart Totals</h4>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Cart Subtotal</td>
+                                <td>${{ total }}</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping and Handing</td>
+                                {% if total > 100 %}
+                                    {% set shipping = 0 %}
+                                    <td>${{ shipping }}</td>
+                                {% else %}
+                                    {% set shipping = 15 %}
+                                    <td>${{ shipping}}</td>
+                                {% endif %}
+                            </tr>
+                            <tr>
+                                <td>Montant HT</td>
+                                <td>${{ total / 1.2 }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Order Total</strong></td>
+                                <td><strong>${{ total + shipping }}</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

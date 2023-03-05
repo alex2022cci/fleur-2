@@ -67,7 +67,9 @@ class ChekoutController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $success = $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL);
             $cancel =  $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL);
-            $this->StripeServives->PaiementStripe($success, $cancel);
+            $ValidStripe  = $this->StripeServives->PaiementStripe($success, $cancel);
+            return $this->redirect($ValidStripe->url, 303);
+
         }
 
         return $this->render('profile/chekout/paiement.html.twig', [

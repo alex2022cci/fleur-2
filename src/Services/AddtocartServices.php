@@ -49,7 +49,6 @@ class AddtocartServices
                 'quantity' => $quantity,
             ];
         }
-
         return $cartData;
     }
 

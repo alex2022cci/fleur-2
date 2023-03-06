@@ -87,6 +87,9 @@ class Order
     #[ORM\Column(length: 10)]
     private ?string $Zip = null;
 
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?User $Utilisateur = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -382,6 +385,18 @@ class Order
     public function setZip(string $Zip): self
     {
         $this->Zip = $Zip;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?User
+    {
+        return $this->Utilisateur;
+    }
+
+    public function setUtilisateur(?User $Utilisateur): self
+    {
+        $this->Utilisateur = $Utilisateur;
 
         return $this;
     }

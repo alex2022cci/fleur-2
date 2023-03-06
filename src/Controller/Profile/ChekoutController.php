@@ -2,11 +2,15 @@
 
 namespace App\Controller\Profile;
 
+use App\Repository\OrderRepository;
+use App\Repository\UserRepository;
 use App\Services\StripeServives;
 use App\Entity\Order;
 use App\Form\OrderType;
 use App\Services\AddtocartServices;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Stripe\Stripe;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +32,7 @@ class ChekoutController extends AbstractController
 
     #[Route('/profile/chekout', name: 'profile_chekout')]
     #[isGranted('ROLE_USER')]
-    public function index(Request $request, EntityManagerInterface $em): Response
+    public function index(Request $request, EntityManagerInterface $em, UserRepository $user): Response
     {
         // creation du Formulaire
         $Order = new Order();
@@ -36,10 +40,11 @@ class ChekoutController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $Order->setUtilisateur($user->find($this->getUser()->getId()));
             $em->persist($Order);
             $em->flush();
 
-            dd($form);
+            return $this->redirectToRoute('profile_paiement');
         }
 
         return $this->render('profile/chekout/index.html.twig', [
@@ -67,7 +72,7 @@ class ChekoutController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $success = $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL);
             $cancel =  $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL);
-            $ValidStripe  = $this->StripeServives->PaiementStripe($success, $cancel);
+            $ValidStripe  = $this->StripeServives->PaiementStripe($success, $cancel, $this->AddtocartServices->getFullCart());
             return $this->redirect($ValidStripe->url, 303);
 
         }
@@ -81,9 +86,27 @@ class ChekoutController extends AbstractController
 
     #[Route('/profile/success', name: 'success_url')]
     #[isGranted('ROLE_USER')]
-    public function success_url(): Response
+    public function success_url(Request $request, OrderRepository $order, ManagerRegistry $em): Response
     {
-        return $this->render('profile/chekout/paiement_success.html.twig');
+        $UpdateOrder = $order->findOneBy(
+            ['Utilisateur' => $this->getUser()->getId()],
+            ['id' => 'DESC']
+        );
+
+        if(!$UpdateOrder) {
+            throw $this->createNotFoundException('L\'utilisateur n existe pas');
+        }
+
+        $UpdateOrder->setStatus(1); // 1 = payé
+        $UpdateOrder->setTax('0.2');
+        $UpdateOrder->setTotal($this->AddtocartServices->getTotal());
+        $UpdateOrder->setSubTotal($this->AddtocartServices->getTotal() / 1.2); // affiche le montant HT
+        // $em->getManager()->persist($order);
+        $em->getManager()->flush();
+
+        return $this->render('profile/chekout/paiement_success.html.twig', [
+            'total' => $this->AddtocartServices->getTotal()
+        ]);
     }
 
     #[Route('/profile/cancel', name: 'cancel_url')]

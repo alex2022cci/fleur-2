@@ -39,7 +39,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setSummary($faker->sentence(10));
             $product->setType($faker->numberBetween(0, 3));
             $product->setSku($faker->ean13());
-            $product->setPrice($faker->randomFloat(2));
+            $product->setPrice($faker->randomFloat(2, 20, 30));
             $product->setQuantity($faker->numberBetween(100, 1000));
             $product->setShop('1');
             $product->setCreatedAt($CreatedAt);

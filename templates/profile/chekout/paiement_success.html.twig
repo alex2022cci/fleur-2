@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement Success{% endblock %}
+
+{% block body %}
+    Merci de votre commande de {{ total }} $
+
+    <a href="{{ path('profile_order') }}">Voir mes commandes</a>
+
+{% endblock %}

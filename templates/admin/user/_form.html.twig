@@ -1,0 +1,46 @@
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+	<div class="bg-secondary text-center rounded p-4">
+		<div class="d-flex align-items-center justify-content-between mb-4">
+			<h6 class="mb-0">Edit User</h6>
+			<a href="{{ path('app_admin_user_index') }}">back to list</a>
+		</div>
+		<div class="table-responsive">
+			{{ form_start(form) }}
+			<table class="table text-start align-middle table-bordered table-hover mb-0">
+				<tbody>
+					<tr>
+						<th>Email</th>
+						<td>{{ form_widget(form.email) }}</td>
+					</tr>
+					<tr>
+						<th>IsVerified</th>
+						<td>{{ form_widget(form.isVerified) }}
+						</td>
+					</tr>
+					<tr>
+						<th>FirstName</th>
+						<td>{{ form_widget(form.FirstName) }}</td>
+					</tr>
+					<tr>
+						<th>Compagny name</th>
+						<td>{{ form_widget(form.MiddleName) }}
+						</td>
+					</tr>
+					<tr>
+						<th>LastName</th>
+						<td>{{ form_widget(form.LastName) }}</td>
+					</tr>
+					<tr>
+						<th>Mobile</th>
+						<td>{{ form_widget(form.Mobile) }}</td>
+					</tr>
+					
+				</tbody>
+			</table>
+            <button class="btn">{{ button_label|default('Save') }}</button>
+			{{ form_end(form) }}
+		</div>
+	</div>
+</div>
+<!-- Recent Sales End -->

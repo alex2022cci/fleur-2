@@ -39,7 +39,7 @@ class Pictures
     private ?string $Alt = null;
 
     #[ORM\ManyToOne(inversedBy: 'Pictures')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Product $Product = null;
 
     public function getId(): ?int

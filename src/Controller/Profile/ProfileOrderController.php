@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class OrderController extends AbstractController
+class ProfileOrderController extends AbstractController
 {
     #[Route('/order', name: 'profile_order')]
     public function index(): Response

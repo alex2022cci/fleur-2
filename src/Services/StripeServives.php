@@ -18,7 +18,7 @@ class StripeServives
                         'product_data' => [
                             'name' => $item['produit']->getTitle(),
                             'images' => [
-                                "http://127.0.0.1:8000/img/product/" . $item['produit']->getPictures()->getValues()[0]->getImageName(),
+                                "https://127.0.0.1:8000/img/product/" . $item['produit']->getPictures()->getValues()[0]->getImageName(),
                             ],
                         ],
                     ],

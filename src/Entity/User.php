@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use App\Entity\Trait\RegistredAtTrait;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -65,15 +66,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $Profile = null;
 
     #[ORM\OneToMany(mappedBy: 'UserId', targetEntity: Product::class)]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private Collection $Products;
 
     #[ORM\OneToMany(mappedBy: 'Utilisateur', targetEntity: Order::class)]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private Collection $orders;
 
     public function __construct()
     {
         $this->Products = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->RegistredAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int

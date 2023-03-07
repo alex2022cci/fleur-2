@@ -2,22 +2,23 @@
 
 namespace App\Controller\Profile;
 
-use App\Repository\OrderRepository;
-use App\Repository\UserRepository;
-use App\Services\StripeServives;
+use Stripe\Stripe;
+use App\Entity\Cart;
 use App\Entity\Order;
 use App\Form\OrderType;
+use App\Services\StripeServives;
+use App\Repository\UserRepository;
+use App\Repository\OrderRepository;
 use App\Services\AddtocartServices;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Stripe\Stripe;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ChekoutController extends AbstractController
 {
@@ -86,7 +87,7 @@ class ChekoutController extends AbstractController
 
     #[Route('/profile/success', name: 'success_url')]
     #[isGranted('ROLE_USER')]
-    public function success_url(Request $request, OrderRepository $order, ManagerRegistry $em): Response
+    public function success_url(OrderRepository $order, ManagerRegistry $em): Response
     {
         $UpdateOrder = $order->findOneBy(
             ['Utilisateur' => $this->getUser()->getId()],
@@ -101,10 +102,26 @@ class ChekoutController extends AbstractController
         $UpdateOrder->setTax('0.2');
         $UpdateOrder->setTotal($this->AddtocartServices->getTotal());
         $UpdateOrder->setSubTotal($this->AddtocartServices->getTotal() / 1.2); // affiche le montant HT
-        // $em->getManager()->persist($order);
-        $em->getManager()->flush();
+        
+        foreach($this->AddtocartServices->getFullCart() as $carts) {
+            $cart = new Cart();
+            $cart->setTitle($carts['produit']->getTitle());
+            $cart->setPrice($carts['produit']->getPrice());
+            $cart->setQuantity($carts['quantity']);
+            $cart->setSKU($carts['produit']->getSKU());
+            $cart->setDiscount($carts['produit']->getDiscount());
+            $cart->setOrders($UpdateOrder);
+            $em->getManager()->persist($cart);
+        }
 
-        return $this->render('profile/chekout/paiement_success.html.twig', [
+        dd($em->getConnection()->beginTransaction());
+        try {
+            $em->getManager()->flush();
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+         return $this->render('profile/chekout/paiement_success.html.twig', [
             'total' => $this->AddtocartServices->getTotal()
         ]);
     }

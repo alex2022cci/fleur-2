@@ -65,10 +65,11 @@ class Product
     private ?string $Content = null;
 
     #[ORM\ManyToOne(inversedBy: 'Products')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?User $UserId = null;
 
     #[ORM\OneToMany(mappedBy: 'Product', targetEntity: Pictures::class)]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private Collection $Pictures;
 
 

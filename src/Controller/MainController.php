@@ -14,6 +14,7 @@ class MainController extends AbstractController
     public function index(ProductRepository $productRepository): Response
     {
         return $this->render('main/index.html.twig', [
+            'controller_name' => 'MainController',
             'newproducts' => $productRepository->findBy([],['PublishedAt' => 'DESC'], 8)
         ]);
     }

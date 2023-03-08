@@ -53,8 +53,8 @@ class ChekoutController extends AbstractController
         ]);
     }
 
-    #[Route('/proppfile/paiement', name: 'profile_paiement')]
-
+    #[Route('/profile/paiement', name: 'profile_paiement')]
+    #[isGranted('ROLE_USER')]
     public function Paiement(Request $request): Response
     {
         // Je créer le btn submit dans le formulaire de paiement
@@ -71,9 +71,9 @@ class ChekoutController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $success = $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL);
+            // $success = $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL);
             $cancel =  $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL);
-            $ValidStripe  = $this->StripeServives->PaiementStripe($success, $cancel, $this->AddtocartServices->getFullCart());
+            $ValidStripe  = $this->StripeServives->PaiementStripe($cancel, $this->AddtocartServices->getFullCart());
             return $this->redirect($ValidStripe->url, 303);
 
         }
@@ -87,8 +87,16 @@ class ChekoutController extends AbstractController
 
     #[Route('/profile/success', name: 'success_url')]
     #[isGranted('ROLE_USER')]
-    public function success_url(OrderRepository $order, ManagerRegistry $em): Response
+    public function success_url(Request $request, OrderRepository $order, ManagerRegistry $em): Response
     {
+
+        $Session_id_stripe = $request->query->get('session_id');
+        $stripe = new \Stripe\StripeClient($_ENV['STRIPE_SK']);
+
+        $session = $stripe->checkout->sessions->retrieve($Session_id_stripe);
+        $customer = $stripe->customers->retrieve($session->customer);
+        $id_stripe = $customer->id;
+
         $UpdateOrder = $order->findOneBy(
             ['Utilisateur' => $this->getUser()->getId()],
             ['id' => 'DESC']
@@ -98,6 +106,7 @@ class ChekoutController extends AbstractController
             throw $this->createNotFoundException('L\'utilisateur n existe pas');
         }
 
+        $UpdateOrder->setToken($id_stripe);
         $UpdateOrder->setStatus(1); // 1 = payé
         $UpdateOrder->setTax('0.2');
         $UpdateOrder->setTotal($this->AddtocartServices->getTotal());
@@ -114,7 +123,6 @@ class ChekoutController extends AbstractController
             $em->getManager()->persist($cart);
         }
 
-        dd($em->getConnection()->beginTransaction());
         try {
             $em->getManager()->flush();
         } catch (\Exception $e) {
@@ -132,6 +140,4 @@ class ChekoutController extends AbstractController
     {
         return $this->render('profile/chekout/paiement_cancel.html.twig');
     }
-
-
 }

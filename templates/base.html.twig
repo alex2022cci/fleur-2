@@ -27,7 +27,11 @@
         <![endif]-->
 
         <div class="body-wrapper">
-            {% include '_partials/ltn__header-top-area.html.twig' %}
+            {% if 'controller_name' ==  'MainController' %}
+                {% include '_partials/ltn__header-top-area.html.twig' %}
+            {% else %}
+                {% include '_partials/header3.html.twig' %}
+            {% endif %}
             {% include '_partials/show-card-right.html.twig' %}
             {% include '_partials/menu-responsive.html.twig' %}
             {% block body %}{% endblock %}

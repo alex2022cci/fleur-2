@@ -39,6 +39,21 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Category[]
+     */
+    public function PaginateCategory($slug): array
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.products', 'p')
+            ->andWhere('c.Slug = :val')
+            ->setParameter('val', $slug)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */

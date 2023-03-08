@@ -14,7 +14,7 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i <= 4000; $i++) {
+        for ($i = 0; $i <= 10000; $i++) {
             
             $img = rand(1, 12) . '.jpg';
 
@@ -22,7 +22,7 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
             $Pictures->setAlt($faker->sentence(3));
             $Pictures->setImageName($img);
             $Pictures->setImageSize($i);
-            $Pictures->setProduct($this->getReference('product_' . rand(0, 100)));
+            $Pictures->setProduct($this->getReference('product_' . rand(0, 5000)));
 
             $manager->persist($Pictures);
         }

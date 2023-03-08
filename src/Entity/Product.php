@@ -72,6 +72,9 @@ class Product
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private Collection $Pictures;
 
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Category $Category = null;
+
 
     public function __construct()
     {
@@ -313,6 +316,18 @@ class Product
                 $picture->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->Category;
+    }
+
+    public function setCategory(?Category $Category): self
+    {
+        $this->Category = $Category;
 
         return $this;
     }

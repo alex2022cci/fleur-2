@@ -32,7 +32,7 @@
                         <ul>
                             <li>
                                <div class="showing-product-number text-right">
-                                    <span>Showing 9 of 20 results</span>
+                                    <span>{{ produits.getTotalItemCount }} product</span>
                                 </div> 
                             </li>
                             <li>
@@ -127,23 +127,39 @@
                         <div class="tab-pane fade" id="liton_product_list">
                             <div class="ltn__product-tab-content-inner ltn__product-list-view">
                                 <div class="row">
-                                    <!-- ltn__product-item -->
+                                    {% for product in produits %}
                                     <div class="col-lg-12">
                                         <div class="ltn__product-item">
                                             <div class="product-img">
-                                                <a href="product-details.html">
-                                                    <img src="img/product/2.png" alt="#">
+                                                <a href="{{ path('app_product', {'slug': product.Slug}) }}">
+                                                    {% for ImageProduit in product.Pictures %}
+                                                        {% if loop.index0 == 0 %}
+                                                            <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile') }}" alt="{{ ImageProduit.Alt}}" height="200">
+                                                        {% endif %}
+                                                    {% endfor %}
                                                 </a>
-                                                <div class="product-badge">
-                                                    <ul>
-                                                        <li class="badge-1">Hot</li>
-                                                    </ul>
-                                                </div>
+                                                {% if product.Discount is not null %}
+                                                    <div class="product-badge">
+                                                        <ul>
+                                                            <li class="badge-2">{{ product.Discount }}%</li>
+                                                        </ul>
+                                                    </div>
+                                                {% endif %}
                                             </div>
                                             <div class="product-info">
-                                                <h2 class="product-title"><a href="product-details.html">Red Rose Bouquet</a></h2>
+                                                <h2 class="product-title">
+                                                    <a href="{{ path('app_product', {'slug': product.Slug}) }}">
+                                                        {{ product.Title }}
+                                                    </a>
+                                                </h2>
                                                 <div class="product-price">
-                                                    <span>$16</span>
+                                                    {% if product.Discount is null %}
+                                                        <span>${{ product.Price }}</span>
+                                                    {% endif %}
+                                                    {% if product.Discount is not null %}
+                                                        <span>${{ product.Price - (product.Price * product.Discount / 100) }}</span>
+                                                        <del>{{ product.Price }}</del>
+                                                    {% endif %}
                                                 </div>
                                                 <div class="product-ratting">
                                                     <ul>
@@ -155,7 +171,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="product-brief">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores sit odit nesciunt,  aliquid, deleniti non et ut dolorem!</p>
+                                                    <p>{{ product.Content }}</p>
                                                 </div>
                                                 <div class="product-hover-action product-hover-action-2">
                                                     <ul>
@@ -165,10 +181,11 @@
                                                             </a>
                                                         </li>
                                                         <li class="add-to-cart">
-                                                            <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <a class="AddToCart" data-id="{{ product.Id }}" href="" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
                                                                 <span class="cart-text d-none d-xl-block">Add to Cart</span>
                                                                 <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
                                                             </a>
+                                                        </li>
                                                         </li>
                                                         <li>
                                                             <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
@@ -180,124 +197,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- ltn__product-item -->
-                                    <div class="col-lg-12">
-                                        <div class="ltn__product-item">
-                                            <div class="product-img">
-                                                <a href="product-details.html"><img src="img/product/1.png" alt="#"></a>
-                                                <div class="product-badge">
-                                                    <ul>
-                                                        <li class="badge-2">12%</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-info">
-                                                <h2 class="product-title"><a href="product-details.html">Red Rose Bouquet</a></h2>
-                                                <div class="product-price">
-                                                    <span>$16</span>
-                                                    <del>$19</del>
-                                                </div>
-                                                <div class="product-ratting">
-                                                    <ul>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="product-brief">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores sit odit nesciunt,  aliquid, deleniti non et ut dolorem!</p>
-                                                </div>
-                                                <div class="product-hover-action product-hover-action-2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                                                <i class="icon-magnifier"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="add-to-cart">
-                                                            <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
-                                                                <span class="cart-text d-none d-xl-block">Add to Cart</span>
-                                                                <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                                                <i class="icon-shuffle"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- ltn__product-item -->
-                                    <div class="col-lg-12">
-                                        <div class="ltn__product-item">
-                                            <div class="product-img">
-                                                <a href="product-details.html"><img src="img/product/4.png" alt="#"></a>
-                                                <div class="product-badge">
-                                                    <ul>
-                                                        <li class="badge-1">Hot</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-info">
-                                                <h2 class="product-title"><a href="product-details.html">Red Rose Bouquet</a></h2>
-                                                <div class="product-price">
-                                                    <span>$16</span>
-                                                </div>
-                                                <div class="product-ratting">
-                                                    <ul>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="product-brief">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores sit odit nesciunt,  aliquid, deleniti non et ut dolorem!</p>
-                                                </div>
-                                                <div class="product-hover-action product-hover-action-2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                                                <i class="icon-magnifier"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="add-to-cart">
-                                                            <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
-                                                                <span class="cart-text d-none d-xl-block">Add to Cart</span>
-                                                                <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                                                <i class="icon-shuffle"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--  -->
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="ltn__pagination-area text-center">
                         <div class="ltn__pagination ltn__pagination-2">
-                            <ul>
-                                <li><a href="#"><i class="icon-arrow-left"></i></a></li>
-                                <li><a href="#">1</a></li>
-                                <li class="active"><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">...</a></li>
-                                <li><a href="#"><i class="icon-arrow-right"></i></a></li>
-                            </ul>
+                            {{ knp_pagination_render(produits) }}
                         </div>
                     </div>
                 </div>
@@ -527,4 +434,37 @@
         </div>
     </div>
     <!-- BRAND LOGO AREA END -->
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $(".AddToCart").on("click", function(event){
+                event.preventDefault();
+                var id = $(this).data("id");
+
+                // je vais l'envoyer en AJAX
+                $.ajax({
+                    url: "/ajax/addtocart",
+                    type: "GET",
+                    data: {id: id},
+                    dataType: 'json',
+                    async: true,
+                    success: function(data, status){
+                        //
+
+                        let title = data.Titre;
+                        let image = data.image;
+                        let slug  = data.Slug;
+
+                        console.log( $(".InjectTitle").text(title) );
+
+                        // j'inject le let title dans le html
+                        $(".InjectTitle").text(title);
+
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

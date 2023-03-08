@@ -66,6 +66,20 @@ class AddtocartServices
         return $total;
     }
 
+    public function remove(int $id)
+    {
+        $cart = $this->getSession()->get('cart', []);
+        if (!empty($cart[$id])) {
+            if($cart[$id] > 1) 
+            {
+                $cart[$id]--;
+            } else {
+                unset($cart[$id]);
+            }
+        }
+        $this->getSession()->set('cart', $cart);
+    }
+
     private function getSession(): SessionInterface
     {
         return $this->requestStack->getSession();

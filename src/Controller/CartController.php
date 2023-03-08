@@ -23,13 +23,19 @@ class CartController extends AbstractController
     public function index(): Response
     {
         $items = $this->AddtocartServices->getFullCart();
-
         $total = $this->AddtocartServices->getTotal();
 
         return $this->render('cart/cart.html.twig', [
             'items' => $items,
             'total' => $total,
         ]);
+    }
+
+    #[Route('/cart/remove/{id}', name: 'app_cart_remove')]
+    public function remove($id): Response
+    {
+        $this->AddtocartServices->remove($id);
+        return $this->redirectToRoute('app_cart');
     }
 
 }

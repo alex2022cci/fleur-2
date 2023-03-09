@@ -6,16 +6,24 @@ use App\Entity\Pictures;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class PicturesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->remove('imageName')
+            ->add('imageFile', VichFileType::class, [
+                // allow any file type
+                'allow_delete' => true,
+                'attr' => [
+                    'multiple' => true,
+                ],
+
+            ])
             ->remove('updatedAt')
             ->remove('imageSize')
-            ->remove('Alt')
+            //->add('Alt')
             ->remove('Product')
         ;
     }

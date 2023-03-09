@@ -2,17 +2,17 @@
 
 namespace App\Controller\Profile;
 
+use App\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileOrderController extends AbstractController
 {
-    #[Route('/order', name: 'profile_order')]
-    public function index(): Response
-    {
+    public function ViewOrder(OrderRepository $order): Response
+    {  
         return $this->render('profile/order/index.html.twig', [
-            'controller_name' => 'OrderController',
+            'history' => $order->findBy(['Utilisateur' => $this->getUser()]),
         ]);
     }
 }

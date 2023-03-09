@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Serializable;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PicturesRepository;
@@ -10,7 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: PicturesRepository::class)]
 #[Vich\Uploadable]
-class Pictures
+class Pictures implements Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -114,6 +115,24 @@ class Pictures
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->imageName,
+            $this->Alt
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->imageName,
+            $this->Alt
+        ) = unserialize($serialized);
     }
 
 }

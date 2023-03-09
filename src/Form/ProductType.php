@@ -38,7 +38,7 @@ class ProductType extends AbstractType
             ->remove('EndAt')
             ->remove('Content')
             ->remove('UserId')   
-            ->add('Pictures', CollectionType::class, [
+            ->add('Pictures', CollectionType::class, [ 
                 'entry_type' => PicturesType::class,
                 'allow_add' => true,
                 'allow_delete' => true,

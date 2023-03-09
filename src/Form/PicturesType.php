@@ -14,16 +14,13 @@ class PicturesType extends AbstractType
     {
         $builder
             ->add('imageFile', VichFileType::class, [
-                // allow any file type
-                'allow_delete' => true,
                 'attr' => [
                     'multiple' => true,
                 ],
-
             ])
             ->remove('updatedAt')
             ->remove('imageSize')
-            //->add('Alt')
+            ->remove('Alt')
             ->remove('Product')
         ;
     }

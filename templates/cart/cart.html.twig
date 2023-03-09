@@ -44,7 +44,11 @@
                                 {% if items | length > 0 %}
                                     {% for item in items %}
                                         <tr>
-                                        <td class="cart-product-remove">x</td>
+                                        <td class="cart-product-remove">
+                                            <a href="{{ path('app_cart_remove', {'id': item.produit.Id}) }}">
+                                                x
+                                            </a>
+                                        </td>
                                         <td class="cart-product-image">
                                             <a href="product-details.html">
                                                 {% for image in item.produit.Pictures %}

@@ -27,7 +27,6 @@ class AddtocartServices
             $cart[$id] = 1;
         }
         $this->getSession()->set('cart', $cart);
-
     }
 
     public function getFullCart(): array
@@ -68,7 +67,7 @@ class AddtocartServices
 
     public function remove(int $id)
     {
-        $cart = $this->getSession()->get('cart', []);
+        $cart = $this->requestStack->getSession()->get('cart', []); 
         if (!empty($cart[$id])) {
             if($cart[$id] > 1) 
             {

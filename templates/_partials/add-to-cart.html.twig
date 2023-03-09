@@ -22,15 +22,15 @@
                                                 <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Cart</p>
                                                 <div class="btn-wrapper">
                                                     <a href="{{ path('app_cart') }}" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                                                    <a href="checkout.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                                                    <a href="{{ path ('profile_chekout') }}" class="theme-btn-2 btn btn-effect-2">Checkout</a>
                                                 </div>
                                              </div>
                                         </div>
                                          <!-- additional-info -->
                                          <div class="additional-info d-none--">
-                                            <p>We want to give you <b>10% discount</b> for your first order, <br>  Use (fiama10) discount code at checkout</p>
+                                            <p>We want to give you <b>10% discount</b> for your first order, <br>  Use (Auxioma) discount code at checkout</p>
                                             <div class="payment-method">
-                                                <img src="img/icons/payment.png" alt="#">
+                                                <img src="{{ asset('img/icons/payment.png') }}" alt="#">
                                             </div>
                                          </div>
                                     </div>

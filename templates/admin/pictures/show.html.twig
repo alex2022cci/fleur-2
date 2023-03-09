@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pictures{% endblock %}
+
+{% block body %}
+    <h1>Pictures</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ picture.id }}</td>
+            </tr>
+            <tr>
+                <th>ImageName</th>
+                <td>{{ picture.imageName }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ImageSize</th>
+                <td>{{ picture.imageSize }}</td>
+            </tr>
+            <tr>
+                <th>Alt</th>
+                <td>{{ picture.Alt }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_pictures_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_pictures_edit', {'id': picture.id}) }}">edit</a>
+
+    {{ include('admin/pictures/_delete_form.html.twig') }}
+{% endblock %}

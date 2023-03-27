@@ -4,17 +4,18 @@ namespace App\Controller\Admin;
 
 use DateTimeImmutable;
 use App\Entity\Product;
+use App\Entity\Pictures;
 use App\Form\ProductType;
-use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/admi/product')]
+#[Route('/admin/product')]
 class ProductController extends AbstractController
 {
     #[Route('/', name: 'app_admin_product_index', methods: ['GET'])]
@@ -48,9 +49,12 @@ class ProductController extends AbstractController
                 // on ca copiper les images dans le dossier img/product
                 $image->move(
                     $this->getParameter('produit_directory'),
-                    $fichier
+                    
                 );
-               
+                $img = new Pictures();
+                $img->setImageName($fichier);
+                $img->setAlt($form->get('Title')->getData());
+                $product->addPicture($img);
             }
             $product->setMetaTitle($form->get('Title')->getData());
 
@@ -62,7 +66,7 @@ class ProductController extends AbstractController
             $product->setCreatedAt(new DateTimeImmutable());
             $product->setUpdatedAt(new DateTimeImmutable());
             $product->setPublishedAt(new DateTimeImmutable());
-            $product->setUserId($User_Id->getId());
+            $product->setUserId($User_Id);
 
             $productRepository->save($product, true);
 

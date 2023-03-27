@@ -68,7 +68,7 @@ class Product
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?User $UserId = null;
 
-    #[ORM\OneToMany(mappedBy: 'Product', targetEntity: Pictures::class)]
+    #[ORM\OneToMany(mappedBy: 'Product', targetEntity: Pictures::class, cascade: ["persist"])]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private Collection $Pictures;
 

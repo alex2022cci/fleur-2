@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/product')]
+#[Route('/admi/product')]
 class ProductController extends AbstractController
 {
     #[Route('/', name: 'app_admin_product_index', methods: ['GET'])]
@@ -24,11 +24,18 @@ class ProductController extends AbstractController
     #[Route('/new', name: 'app_admin_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProductRepository $productRepository): Response
     {
+
+
+
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            dd($request);
+
+
             $productRepository->save($product, true);
 
             return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);

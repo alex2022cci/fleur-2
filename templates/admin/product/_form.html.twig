@@ -52,7 +52,15 @@
                 </tr>
                 <tr>
                     <th>Pictures</th>
-                    <td>{{ form_widget(form.Pictures) }}</td>
+                    <td><input
+                            type="file"
+                            multiple
+                            name="files[]"
+                            label="Drop files here or click to upload."
+                            help="Upload files here and they won't be sent immediately"
+                            is="drop-files"
+                    />
+                    </td>
                 </tr>
                 </tbody>
             </table>

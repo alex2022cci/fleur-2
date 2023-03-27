@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block title %}New Product{% endblock %}
 
@@ -8,4 +8,8 @@
     {{ include('admin/product/_form.html.twig') }}
 
     <a href="{{ path('app_admin_product_index') }}">back to list</a>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="module" src="//unpkg.com/@grafikart/drop-files-element"></script>
 {% endblock %}

@@ -8,43 +8,41 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-           /* ->add('Category', EntityType::class, [
+            ->add('Category', EntityType::class, [
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'Name',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => true,
-            ])*/
-            ->remove('Title')
-            ->remove('MetaTitle')
-            ->remove('Slug')
-            ->remove('Summary')
-            ->remove('Type')
-            ->remove('SKU')
-            ->remove('Price')
-            ->remove('Discount')
-            ->remove('Quantity')
-            ->remove('Shop')
-            ->remove('CreatedAt')
-            ->remove('UpdatedAt')
-            ->remove('PublishedAt')
-            ->remove('StartsAt')
-            ->remove('EndAt')
-            ->remove('Content')
-            ->remove('UserId')   
+            ])
+            ->add('Title')
+            ->add('Summary')
+            ->add('SKU')
+            ->add('Price')
+            ->add('Discount')
+            ->add('Quantity')
+            ->add('StartsAt')
+            ->add('EndAt')
+            ->add('Content')
+
             ->add('Pictures', CollectionType::class, [ 
                 'entry_type' => PicturesType::class,
+                'entry_options' => [
+                    'label' => false,
+                    'required' => false,
+                ],
                 'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label' => false,
-            ])
+                'prototype' => true,
+                'prototype_name' => '__image_index__',
+                'by_reference' => false, 
+            ]) 
         ;
     }
 

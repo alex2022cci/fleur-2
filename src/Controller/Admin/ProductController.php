@@ -49,7 +49,7 @@ class ProductController extends AbstractController
                 // on ca copiper les images dans le dossier img/product
                 $image->move(
                     $this->getParameter('produit_directory'),
-                    
+                    $fichier
                 );
                 $img = new Pictures();
                 $img->setImageName($fichier);

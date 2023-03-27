@@ -2,13 +2,17 @@
 
 namespace App\Controller\Admin;
 
+use DateTimeImmutable;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admi/product')]
 class ProductController extends AbstractController
@@ -22,10 +26,10 @@ class ProductController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_product_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProductRepository $productRepository): Response
+    public function new(UserRepository $user, Request $request, ProductRepository $productRepository, SluggerInterface $slugger): Response
     {
 
-
+        $User_Id = $user->find($this->getUser()->getId());
 
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -33,8 +37,32 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dd($request);
+            // recupere les files uploadés
+            $images = $request->files->get('files');
 
+            // on boucle les images
+            foreach($images as $image) {
+                // On donne un nom unique à l'image
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                // on ca copiper les images dans le dossier img/product
+                $image->move(
+                    $this->getParameter('produit_directory'),
+                    $fichier
+                );
+               
+            }
+            $product->setMetaTitle($form->get('Title')->getData());
+
+            // on va créer notre slug avec le titre du produit
+            $slug = $slugger->slug($form->get('Title')->getData());
+            $product->setSlug($slug);
+            $product->setType('1');
+            $product->setShop('1');
+            $product->setCreatedAt(new DateTimeImmutable());
+            $product->setUpdatedAt(new DateTimeImmutable());
+            $product->setPublishedAt(new DateTimeImmutable());
+            $product->setUserId($User_Id->getId());
 
             $productRepository->save($product, true);
 

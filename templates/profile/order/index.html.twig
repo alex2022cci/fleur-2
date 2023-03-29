@@ -21,7 +21,7 @@
                                 <td>{{ order.status }}</td>
                                 <td>${{ order.Total }}</td>
                                 <td>
-                                    <a href="cart.html">Détail</a>
+                                    <a href="{{ path('profile_pdf', {'id': order.id }) }}">Détail</a>
                                 </td>
                             </tr>
                         {% endfor %}

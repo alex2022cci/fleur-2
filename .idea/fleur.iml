@@ -150,6 +150,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/scheb/2fa-trusted-device" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/scheb/2fa-email" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/scheb/2fa-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-snappy-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-snappy" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

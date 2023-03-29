@@ -8,45 +8,6 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon" />
-
-        <script src="{{ asset('tarteaucitron/tarteaucitron.js') }}"></script>
-        <script>
-            tarteaucitron.init({
-                "privacyUrl": "", /* URL de la page de la politique de vie privée */
-
-                "hashtag": "#tarteaucitron", /* Ouvrir le panneau contenant ce hashtag */
-                "cookieName": "tarteaucitron", /* Nom du Cookie */
-
-                "orientation": "middle", /* Position de la bannière (top - bottom) */
-                "showAlertSmall": true, /* Voir la bannière réduite en bas à droite */
-                "cookieslist": true, /* Voir la liste des cookies */
-
-                "adblocker": false, /* Voir une alerte si un bloqueur de publicités est détecté */
-                "AcceptAllCta": true, /* Voir le bouton accepter tout (quand highPrivacy est à true) */
-                "highPrivacy": true, /* Désactiver le consentement automatique */
-                "handleBrowserDNTRequest": false, /* Si la protection du suivi du navigateur est activée, tout interdire */
-
-                "removeCredit": false, /* Retirer le lien vers tarteaucitron.js */
-                "moreInfoLink": true, /* Afficher le lien "voir plus d'infos" */
-                "useExternalCss": false, /* Si false, tarteaucitron.css sera chargé */
-
-                //"cookieDomain": ".my-multisite-domaine.fr", /* Cookie multisite */
-
-                "readmoreLink": "/cookiespolicy" /* Lien vers la page "Lire plus" */
-            });
-        </script>
-        <script type="text/javascript">
-            tarteaucitron.user.facebookpixelId = 'YOUR-ID'; tarteaucitron.user.facebookpixelMore = function () { /* add here your optionnal facebook pixel function */ };
-            (tarteaucitron.job = tarteaucitron.job || []).push('facebookpixel');
-        </script>
-        <script type="text/javascript">
-            tarteaucitron.user.googleFonts = 'families';
-            (tarteaucitron.job = tarteaucitron.job || []).push('googlefonts');
-        </script>
-        <script type="text/javascript">
-            tarteaucitron.user.googlemapsKey = 'API KEY';
-            (tarteaucitron.job = tarteaucitron.job || []).push('googlemaps');
-        </script>
         {{ encore_entry_link_tags('app') }}
         {% block stylesheets %}{% endblock %}
         <!-- Font Icons css -->
@@ -59,7 +20,7 @@
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
     </head>
-    <body>
+    <body {{ stimulus_controller('hello')}} >
         <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->

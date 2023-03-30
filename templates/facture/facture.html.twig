@@ -199,19 +199,11 @@
                         <h4 style="margin-top: 5px; margin-bottom: 5px">
                             Bill to/ Ship to
                         </h4>
-                        <!-- <p>NAME   :- {{ customer["name"]}}</p>
-                        <p>ADDRESS:- {{customer['address']}}</p>
-                        <p>MOBILE :- {{customer['mobile']}}</p>
-                        <p>OrderID   :- {{customer['order_id']}}</p>  -->
-                        <p style="font-size: 14px">
-                            Aakriti Rathore,B-268, west vinod nagar, street no.2,near
-                            press apartment bus stand, Patparganj, IP
-                            Extension,Delhi,07,110092,Delhi(07)<br />
-                            Tel:
-                            <a href="tel:01241234568" style="color: #00bb07"
-                            >0124-1234568</a
-                            >
-                        </p>
+                        <p>NAME   :- {{ Order.Utilisateur.FirstName }}</p>
+                        <p>ADDRESS:- {{ Order.line1 }}</p>
+                        <p>MOBILE :- {{ Order.Utilisateur.mobile }}</p>
+                        <p>OrderID   :- {{ Order.token }}</p>
+
                     </div>
                 </td>
             </tr>
@@ -240,7 +232,7 @@
                     color: #626262;
                     margin-left: 5px;
                   "
-                    >Order ID: {{data1['order_id']}}</span
+                    >Order ID: {{ Order.token }}</span
                     >
                     <p
                             style="
@@ -251,7 +243,7 @@
                   "
                     >
                         Delivery Estimate:
-                        <span style="color: #00bb07">Today {{data1['schedule']}}</span
+                        <span style="color: #00bb07">Today </span
                         ><br />
                     </p>
                 </h3>
@@ -365,20 +357,20 @@
         <tr>
             <th style="vertical-align: top">Coupon Discount</th>
             <td style="vertical-align: top; color: #000">
-                <b> ₹{{total['coupon_amount']}}</b>
+                <b> </b>
             </td>
         </tr>
         <tr>
             <th style="vertical-align: top">Delivery Charge</th>
             <td style="vertical-align: top">
-                <b>₹{{ total['delivery_charge']}}</b>
+                <b></b>
             </td>
         </tr>
 
         <tr>
             <th style="vertical-align: top">Saving</th>
             <td style="vertical-align: top; color: #000">
-                <b>₹{{total['saving']}}</b>
+                <b>₹</b>
             </td>
         </tr>
     </table>

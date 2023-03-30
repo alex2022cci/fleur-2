@@ -15,9 +15,9 @@ class PdfController extends AbstractController
     {
         dd($order);
 
-        $html = $this->renderView('MyBundle:Foo:bar.html.twig', array(
+        $html = $this->renderView('facture/facture.html.twig', [
             'some'  => $vars
-        ));
+        ]);
 
         return new PdfResponse(
             $knpSnappyPdf->getOutputFromHtml($html),

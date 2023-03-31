@@ -20,11 +20,10 @@
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
     </head>
-    <body {{ stimulus_controller('hello')}} >
+    <body>
         <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
-
         <div class="body-wrapper">
        
             {{render(controller('App\\Controller\\MenuController::index'))}}
@@ -50,9 +49,6 @@
             </div>
         </div>
         <!-- preloader area end -->
-
-
-        
         <!-- All JS Plugins -->
         <script src="{{ asset('js/plugins.js') }}"></script>
         <!-- Main JS -->

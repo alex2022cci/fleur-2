@@ -7,7 +7,7 @@
         <div class="product-img">
             <a href="{{ path('app_product', {'slug': product.Slug}) }}">
 
-                    <swiper-container effect="flip" class="mySwiper" navigation="true">
+                    <swiper-container class="mySwiper" navigation="true">
                         {% for ImageProduit in product.Pictures %}
                         <swiper-slide>
                             <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile') }}" alt="{{ ImageProduit.Alt}}" height="200">

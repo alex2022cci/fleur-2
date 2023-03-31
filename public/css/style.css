@@ -4568,7 +4568,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
     .ltn__header-options > div:last-child {
       margin-right: 0; }
   .ltn__header-options i {
-    color: var(--ltn__heading-color);
+    color: #ffffff;
     font-size: 20px; }
   .ltn__header-options .ltn__drop-menu > ul > li > a {
     padding: 0; }
@@ -6443,7 +6443,9 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   visibility: hidden;
   -webkit-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s; }
+  transition: all 0.3s ease 0s;
+  z-index:999; }
+
 
 .ltn__product-item:hover .product-hover-action {
   top: 50%;

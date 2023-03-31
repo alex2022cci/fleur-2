@@ -12938,3 +12938,9 @@ input.cart-plus-minus-box {
 /* ----------------------------------------------------
     END
 ---------------------------------------------------- */
+/*
+  * modif par guillaume
+ */
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 22px !important;
+}

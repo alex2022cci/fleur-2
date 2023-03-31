@@ -1,7 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  connect() {
-    alert("Hello, Stimulus!");
+  static targets = [ "modal" ]
+
+  get modal() {
+    return this.modalTarget
   }
 }

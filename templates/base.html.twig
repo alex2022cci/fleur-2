@@ -51,12 +51,14 @@
         </div>
         <!-- preloader area end -->
 
-        {{ encore_entry_script_tags('app') }}
+
         
         <!-- All JS Plugins -->
         <script src="{{ asset('js/plugins.js') }}"></script>
         <!-- Main JS -->
         <script src="{{ asset('js/main.js') }}"></script>
+
+        {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

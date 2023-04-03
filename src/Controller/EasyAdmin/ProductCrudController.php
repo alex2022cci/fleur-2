@@ -61,5 +61,4 @@ class ProductCrudController extends AbstractCrudController
                 ->setFormat('dd/MM/yyyy'),
         ];
     }
-
 }

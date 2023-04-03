@@ -4,69 +4,69 @@
     {% else %}
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
     {% endif %}
-        <div class="ltn__product-item text-center">
-            <div class="product-img">
-                <a href="{{ path('app_product', {'slug': product.Slug}) }}">
+    <div class="ltn__product-item text-center">
+        <div class="product-img">
+            <a href="{{ path('app_product', {'slug': product.Slug}) }}">
 
-                        <swiper-container class="mySwiper" navigation="true">
-                            {% for ImageProduit in product.Pictures %}
-                            <swiper-slide>
-                                <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile') }}" alt="{{ ImageProduit.Alt}}" height="200">
-                            </swiper-slide>
-                            {% endfor %}
-                        </swiper-container>
+                <swiper-container class="mySwiper" navigation="true">
+                    {% for ImageProduit in product.Pictures %}
+                        <swiper-slide>
+                            <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile')  | imagine_filter('imageproduit') }}" alt="{{ ImageProduit.Alt}}">
+                        </swiper-slide>
+                    {% endfor %}
+                </swiper-container>
 
-                </a>
-                {% if product.Discount is not null %}
-                    <div class="product-badge">
-                        <ul>
-                            <li class="badge-2">{{ product.Discount }}%</li>
-                        </ul>
-                    </div>
-                {% endif %}
-                <div class="product-hover-action product-hover-action-2">
+            </a>
+            {% if product.Discount is not null %}
+                <div class="product-badge">
                     <ul>
-                        <li>
-                            <a href="#"title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                <i class="icon-magnifier"></i>
-                            </a>
-                        </li>
-                        <li class="add-to-cart">
-                            <a class="AddToCart" data-id="{{ product.Id }}" href="" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
-                                <span class="cart-text d-none d-xl-block">Add to Cart</span>
-                                <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                <i class="icon-shuffle"></i>
-                            </a>
-                        </li>
+                        <li class="badge-2">{{ product.Discount }}%</li>
                     </ul>
                 </div>
-                {% set DateJour = "now"|date("Y/m/d") %}
-                {% if product.EndAt|date("Y/m/d") > DateJour %}
-                    <div class="ltn__product-countdown">
-                        <div class="ltn__countdown" data-countdown="{{ product.EndAt|date("Y/m/d") }}"></div>
-                    </div>
+            {% endif %}
+            <div class="product-hover-action product-hover-action-2">
+                <ul>
+                    <li>
+                        <a href="#"title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                            <i class="icon-magnifier"></i>
+                        </a>
+                    </li>
+                    <li class="add-to-cart">
+                        <a class="AddToCart" data-id="{{ product.Id }}" href="" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                            <span class="cart-text d-none d-xl-block">Add to Cart</span>
+                            <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                            <i class="icon-shuffle"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% set DateJour = "now"|date("Y/m/d") %}
+            {% if product.EndAt|date("Y/m/d") > DateJour %}
+                <div class="ltn__product-countdown">
+                    <div class="ltn__countdown" data-countdown="{{ product.EndAt|date("Y/m/d") }}"></div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="product-info">
+            <h2 class="product-title">
+                <a href="{{ path('app_product', {'slug': product.Slug}) }}">
+                    {{ product.Title }}
+                </a>
+            </h2>
+            <div class="product-price">
+                {% if product.Discount is null %}
+                    <span>${{ product.Price }}</span>
+                {% endif %}
+                {% if product.Discount is not null %}
+                    <span>${{ product.Price - (product.Price * product.Discount / 100) }}</span>
+                    <del>{{ product.Price }}</del>
                 {% endif %}
             </div>
-            <div class="product-info">
-                <h2 class="product-title">
-                    <a href="{{ path('app_product', {'slug': product.Slug}) }}">
-                        {{ product.Title }}
-                    </a>
-                </h2>
-                <div class="product-price">
-                    {% if product.Discount is null %}
-                        <span>${{ product.Price }}</span>
-                    {% endif %}
-                    {% if product.Discount is not null %}
-                        <span>${{ product.Price - (product.Price * product.Discount / 100) }}</span>
-                        <del>{{ product.Price }}</del>
-                    {% endif %}
-                </div>
-            </div>
         </div>
+    </div>
     </div>
 {% endblock %}

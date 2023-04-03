@@ -11,7 +11,8 @@
                 <swiper-container class="mySwiper" navigation="true">
                     {% for ImageProduit in product.Pictures %}
                         <swiper-slide>
-                            <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile')  | imagine_filter('imageproduit') }}" alt="{{ ImageProduit.Alt}}">
+                            {# <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile')  | imagine_filter('imageproduit') }}" alt="{{ ImageProduit.Alt}}"> #}
+                            <img src="/img/product/{{ ImageProduit.imageName }}" alt="{{ ImageProduit.Alt}}">
                         </swiper-slide>
                     {% endfor %}
                 </swiper-container>

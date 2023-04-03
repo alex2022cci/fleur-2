@@ -43,6 +43,10 @@ class Pictures
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Product $Product = null;
 
+    public function __toString(): string
+    {
+        return $this->imageName;
+    }
     public function getId(): ?int
     {
         return $this->id;

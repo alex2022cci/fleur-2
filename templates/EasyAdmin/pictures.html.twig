@@ -1,0 +1,6 @@
+{% if ea.crud.currentAction == 'index' %}
+    {% set firstItem = field.value|first %}
+    {% if firstItem %}
+        <img src="{{ vich_uploader_asset(firstItem, 'imageFile') }}" alt="" height="50" width="80" class="img-fluid">
+    {% endif %}
+{% endif %}

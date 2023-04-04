@@ -1,0 +1,63 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}User
+{% endblock %}
+
+{% block body %}
+	<!-- Recent Sales Start -->
+	<div class="container-fluid pt-4 px-4">
+		<div class="bg-secondary text-center rounded p-4">
+			<div class="d-flex align-items-center justify-content-between mb-4">
+				<h6 class="mb-0">User</h6>
+				<a href="{{ path('app_admin_user_index') }}">back to list</a>
+			</div>
+			<div class="table-responsive">
+				<table class="table text-start align-middle table-bordered table-hover mb-0">
+					<tbody>
+						<tr>
+							<th>Email</th>
+							<td>{{ user.email }}</td>
+						</tr>
+						<tr>
+							<th>IsVerified</th>
+							<td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+						</tr>
+						<tr>
+							<th>FirstName</th>
+							<td>{{ user.FirstName }}</td>
+						</tr>
+						<tr>
+							<th>Compagny name</th>
+							<td>{{ user.MiddleName }}</td>
+						</tr>
+						<tr>
+							<th>LastName</th>
+							<td>{{ user.LastName }}</td>
+						</tr>
+						<tr>
+							<th>Mobile</th>
+							<td>{{ user.Mobile }}</td>
+						</tr>
+						<tr>
+							<th>LastLogin</th>
+							<td>{{ user.LastLogin ? user.LastLogin|date('Y-m-d H:i:s') : '' }}</td>
+						</tr>
+						<tr>
+							<th>RegistredAt</th>
+							<td>{{ user.RegistredAt ? user.RegistredAt|date('Y-m-d H:i:s') : '' }}</td>
+						</tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+						<tr>
+							<th><a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a></th>
+							<td>{{ include('admin/user/_delete_form.html.twig') }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- Recent Sales End -->
+{% endblock %}

@@ -1,0 +1,38 @@
+
+<div class="tab-pane fade" id="liton_tab_1_2">
+	<div class="ltn__myaccount-tab-content-inner">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Order</th>
+						<th>Date</th>
+						<th>Status</th>
+						<th>Total</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+                    {% if history | length > 1 %}
+                        {% for order in history %}
+                            <tr>
+                                <td>{{ order.token }}</td>
+                                <td>{{ order.CreatedAt|date("d - m - Y") }}</td>
+                                <td>{{ order.status }}</td>
+                                <td>${{ order.Total }}</td>
+                                <td>
+                                    <a href="{{ path('profile_pdf', {'id': order.id }) }}">Détail</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td colspan="5"> Aucune commande </td> </tr>
+                    {% endif %}
+
+
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

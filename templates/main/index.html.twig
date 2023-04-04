@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+
+    {% include 'main/_partials/slider.html.twig' %}
+    {% include 'main/_partials/product.html.twig' %}
+    {% include 'main/_partials/banner.html.twig' %}
+    {% include 'main/_partials/counter.html.twig' %}
+    {% include 'main/_partials/top-product.html.twig' %}
+    {% include 'main/_partials/featured.html.twig' %}
+    {% include 'main/_partials/teams.html.twig' %}
+    {% include 'main/_partials/newsletter.html.twig' %}
+
+
+{% endblock %}
+{% block javascripts %}
+<script>
+    $(document).ready(function(){
+        $(".AddToCart").on("click", function(event){ 
+            event.preventDefault();
+            var id = $(this).data("id");    
+
+            // je vais l'envoyer en AJAX
+            $.ajax({
+                url: "/ajax/addtocart",
+                type: "GET",
+                data: {id: id},
+                dataType: 'json',
+                async: true,
+                success: function(data, status){
+                    // 
+
+                    let title = data.Titre;
+                    let image = data.image;
+                    let slug  = data.Slug;
+
+                    console.log( $(".InjectTitle").text(title) );
+
+                    // j'inject le let title dans le html
+                    $(".InjectTitle").text(title);
+                    
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

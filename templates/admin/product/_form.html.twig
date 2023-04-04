@@ -1,0 +1,80 @@
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Update Product</h6>
+            <a href="">back to list</a>
+        </div>
+        <div class="table-responsive">
+
+            {{ form_start(form) }}
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <tbody>
+                <tr>
+                    <th>Catagory</th>
+                    <td>{{ form_widget(form.Category) }}</td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ form_widget(form.Title) }}</td>
+                </tr>
+                <tr>
+                    <th>SKU</th>
+                    <td>{{ form_widget(form.SKU) }}</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>{{ form_widget(form.Price) }}</td>
+                </tr>
+                <tr>
+                    <th>Quantity</th>
+                    <td>{{ form_widget(form.Quantity) }}</td>
+                </tr>
+                <tr>
+                    <th>Discount</th>
+                    <td>{{ form_widget(form.Discount) }}</td>
+                </tr>
+                <tr>
+                    <th>Discount start</th>
+                    <td>{{ form_widget(form.StartsAt) }}</td>
+                </tr>
+                <tr>
+                    <th>Discount End</th>
+                    <td>{{ form_widget(form.EndAt) }}</td>
+                </tr>
+                <tr>
+                    <th>Short Description</th>
+                    <td>{{ form_widget(form.Summary) }}</td>
+                </tr>
+                <tr>
+                    <th>Long Description</th>
+                    <td>{{ form_widget(form.Content) }}</td>
+                </tr>
+                <tr>
+                    <th>Pictures</th>
+                    <td><input
+                            type="file"
+                            multiple
+                            name="files[]"
+                            label="Drop files here or click to upload."
+                            help="Upload files here and they won't be sent immediately"
+                            is="drop-files"
+                    />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                <tr>
+                    <th><a href="">edit</a></th>
+                    <td>{{ include('admin/product/_delete_form.html.twig') }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="btn">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->

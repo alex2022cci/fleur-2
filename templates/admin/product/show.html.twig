@@ -1,0 +1,61 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+
+
+    <!-- Recent Sales Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">User</h6>
+                <a href="">back to list</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <tbody>
+                    <tr>
+                        <th>Picture</th>
+                        <td>
+                            {% for picture in product.Pictures %}
+                                <img src="{{ vich_uploader_asset(picture, 'imageFile') }}" alt="" height="50">
+                            {% endfor %}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ product.Title }}</td>
+                    </tr>
+                    <tr>
+                        <th>SKU</th>
+                        <td>{{ product.SKU }}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ product.Price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        <td>{{ product.Quantity }}</td>
+                    </tr>
+                    <tr>
+                        <th>Discount</th>
+                        <td>{{ product.Discount }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                    <tr>
+                        <th><a href="">edit</a></th>
+                        <td>{{ include('admin/product/_delete_form.html.twig') }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Recent Sales End -->
+{% endblock %}

@@ -23,10 +23,14 @@ class ModalController extends AbstractController
     public function index(Request $request, ProductRepository $productRepository)
     {
         if($request->isXmlHttpRequest() == true) {
-            $ModalAddToCart = $productRepository->find($request->query->get('id'));
+            $ModalAddToCart = $productRepository->findOneBy(
+                [
+                    'Slug' => $request->query->get('id')
+                ]
+            );
 
             // A prevoir l'envoie en sessions pour notre pannier
-           $this->AddtocartServices->add($request->query->get('id')); 
+           $this->AddtocartServices->add($ModalAddToCart->getId()); 
 
             $DonneesAEnvoyerALaModal = [
                 'image'  => $ModalAddToCart->getPictures()->getValues()[0]->getimageName(),

@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Serializable;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PicturesRepository;
@@ -47,6 +46,7 @@ class Pictures
     {
         return $this->imageName;
     }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +120,4 @@ class Pictures
     {
         return $this->imageSize;
     }
-
-   
 }

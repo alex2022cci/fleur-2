@@ -15,16 +15,13 @@ class MainController extends AbstractController
     #[Route('/', name: 'app_main')]
     public function index(ProductRepository $productRepository, CacheInterface $cache): Response
     {
-
-       //dd($productRepository->FindNewProducts());
-
         $newproducts = $cache->get('newproducts', function (ItemInterface $item) use ($productRepository) {
             $item->expiresAfter(3600);
             return $productRepository->FindNewProducts();
         });
 
         return $this->render('main/index.html.twig', [
-            'newproducts' => $productRepository->FindNewProducts()
+            'newproducts' => $newproducts
         ]);
     }
 }

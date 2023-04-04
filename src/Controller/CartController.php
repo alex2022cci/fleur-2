@@ -38,4 +38,19 @@ class CartController extends AbstractController
         return $this->redirectToRoute('app_cart');
     }
 
+    public function show_card_right(): Response
+    {
+        $items = $this->AddtocartServices->getFullCart();
+        $total = $this->AddtocartServices->getTotal();
+
+        return $this->render('_partials/show-card-right.html.twig', [
+            'items' => $items,
+            'total' => $total,
+        ]);
+    }
+
+    public function show_card_right_empty(): Response
+    {
+        return $this->render('_partials/show-card-right_empty.html.twig');
+    }
 }

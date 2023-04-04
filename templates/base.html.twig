@@ -28,7 +28,12 @@
        
             {{render(controller('App\\Controller\\MenuController::index'))}}
 
-            {% include '_partials/show-card-right.html.twig' %}
+            {% if app.session.get('cart') | length > 0 %}
+                {{render(controller('App\\Controller\\CartController::show_card_right'))}}
+            {% else %}
+                {{render(controller('App\\Controller\\CartController::show_card_right_empty'))}}
+            {% endif %}
+            
             {% include '_partials/menu-responsive.html.twig' %}
             {% block body %}{% endblock %}
 

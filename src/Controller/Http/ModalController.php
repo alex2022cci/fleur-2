@@ -30,7 +30,7 @@ class ModalController extends AbstractController
             );
 
             // A prevoir l'envoie en sessions pour notre pannier
-           $this->AddtocartServices->add($ModalAddToCart->getId()); 
+           $this->AddtocartServices->add($ModalAddToCart->getId());
 
             $DonneesAEnvoyerALaModal = [
                 'image'  => $ModalAddToCart->getPictures()->getValues()[0]->getimageName(),

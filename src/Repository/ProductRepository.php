@@ -46,9 +46,10 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->select('p.Price', 'p.Title','p.EndAt', 'p.Slug','p.Discount', 'i.imageName as image', 'i.Alt')
-            ->leftJoin('p.Pictures', 'i')
+            ->leftJoin('p.Pictures', 'i', 'limit 1')
             ->andWhere('p.PublishedAt <= :now')
             ->setParameter('now', new \DateTime())
+            ->orderBy('p.PublishedAt', 'DESC')
             ->setMaxResults(8)
             ->getQuery()
             ->getResult()

@@ -45,12 +45,29 @@ class ProductRepository extends ServiceEntityRepository
     public function FindNewProducts(): array
     {
         return $this->createQueryBuilder('p')
-            ->select('p.Price', 'p.Title','p.EndAt', 'p.Slug','p.Discount', 'i.imageName as image', 'i.Alt')
-            ->leftJoin('p.Pictures', 'i', 'limit 1')
+            ->leftJoin('p.Pictures', 'i')
             ->andWhere('p.PublishedAt <= :now')
             ->setParameter('now', new \DateTime())
-            ->orderBy('p.PublishedAt', 'DESC')
+            ->orderBy('p.PublishedAt', 'ASC')
+            ->groupBy('p.id')
             ->setMaxResults(8)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @return Product[]
+     */
+    Public function FindByCategory($slug): array
+    {
+        return $this->createQueryBuilder('p')
+            //  ->select('p.Price', 'p.Title','p.EndAt', 'p.Slug','p.Discount', 'i.imageName', 'i.Alt')
+            ->leftJoin('p.Pictures', 'i', 'limit 1')
+            ->innerJoin('p.Category', 'c')
+            ->andWhere('c.Slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('p.id', 'ASC')
             ->getQuery()
             ->getResult()
             ;

@@ -6,12 +6,11 @@
     {% endif %}
     <div class="ltn__product-item text-center">
         <div class="product-img">
-            <a href="{{ path('app_product', {'slug': product.Slug}) }}">
+            <a href="{{ path('app_product', {'Slug': product.Slug}) }}">
                 <swiper-container class="mySwiper" navigation="true">
-                        <swiper-slide>
-                            {# <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile')  | imagine_filter('imageproduit') }}" alt="{{ ImageProduit.Alt}}"> #}
-                            <img src="/img/product/{{ product.image }}" alt="{{ product.Alt}}">
-                        </swiper-slide>
+                            {% for ImageProduit in product.Pictures %}<swiper-slide>
+                                <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile') | imagine_filter('imageproduit') }}" alt="{{ ImageProduit.Alt}}">
+                            </swiper-slide>{% endfor %}             
                 </swiper-container>
             </a>
             {% if product.Discount is not null %}
@@ -50,7 +49,7 @@
         </div>
         <div class="product-info">
             <h2 class="product-title">
-                <a href="{{ path('app_product', {'slug': product.Slug}) }}">
+                <a href="{{ path('app_product', {'Slug': product.Slug}) }}">
                     {{ product.Title }}
                 </a>
             </h2>

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,16 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     #[Route('/category/{slug}', name: 'app_category')]
-    public function index($slug, Request $request, PaginatorInterface $paginator, CategoryRepository $CategoryRepository): Response
+    public function index($slug, Request $request, PaginatorInterface $paginator, ProductRepository $productRepository): Response
     {
 
-        $produit = $CategoryRepository->PaginateCategory($slug);
-        $query = $produit[0]->getProducts()->getValues();
+        $produit = $productRepository->FindByCategory($slug);
 
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            12 /*limit per page*/
+            $produit,
+            $request->query->getInt('page', 1),
+            12
         );
 
         return $this->render('category/index.html.twig', [

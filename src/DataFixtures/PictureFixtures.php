@@ -22,7 +22,7 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
             $Pictures->setAlt($faker->sentence(3));
             $Pictures->setImageName($img);
             $Pictures->setImageSize($i);
-            $Pictures->setProduct($this->getReference('product_' . rand(0, 5000)));
+            $Pictures->setProduct($this->getReference('product_' . rand(0, 500)));
 
             $manager->persist($Pictures);
         }

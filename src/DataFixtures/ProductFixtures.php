@@ -15,7 +15,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i <= 5000; $i++) {
+        for ($i = 0; $i <= 500; $i++) {
             $userId = $this->getReference('user_' . '0');
             $category = $this->getReference('category_' . rand(1, 5));
 

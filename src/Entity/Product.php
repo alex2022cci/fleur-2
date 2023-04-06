@@ -29,7 +29,7 @@ class Product
     private ?string $Summary = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $Type = null;
+    private ?int $Type = 1;
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $SKU = null;
@@ -43,8 +43,8 @@ class Product
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $Quantity = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Shop = null;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $Shop = 1;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $CreatedAt = null;

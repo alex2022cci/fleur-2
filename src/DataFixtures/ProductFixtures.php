@@ -46,6 +46,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setCreatedAt($CreatedAt);
             $product->setUpdatedAt($CreatedAt);
             $product->setPublishedAt(new DateTimeImmutable);
+            $product->setContent($faker->paragraph(rand(20,50), false));
 
             if (rand(0, 3) == 1) {
                 $product->setDiscount($faker->numberBetween(10, 50));

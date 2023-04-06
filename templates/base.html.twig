@@ -8,15 +8,9 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon" />
-        {{ encore_entry_link_tags('app') }}
-        {% block stylesheets %}{% endblock %}
-        <!-- Font Icons css -->
         <link rel="stylesheet" href="{{ asset('css/font-icons.css') }}">
-        <!-- plugins css -->
         <link rel="stylesheet" href=" {{ asset('css/plugins.css') }} ">
-        <!-- Main Stylesheet -->
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <!-- Responsive css -->
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
     </head>
@@ -44,7 +38,6 @@
             {% include '_partials/quick-view.html.twig' %}
         </div>
         
-        <!-- preloader area start -->
         <div class="preloader d-none" id="preloader">
             <div class="preloader-inner">
                 <div class="spinner">
@@ -53,15 +46,10 @@
                 </div>
             </div>
         </div>
-        <!-- preloader area end -->
-        <!-- All JS Plugins -->
+
         <script src="{{ asset('js/plugins.js') }}"></script>
-        <!-- Main JS -->
         <script src="{{ asset('js/main.js') }}"></script>
-
         <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
-
-        {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

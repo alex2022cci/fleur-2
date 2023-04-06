@@ -40,6 +40,24 @@ class UserFixtures extends Fixture
         $user->setIntro('1');
         $user->setProfile('Je suis le créateur de ce site');
 
+        // je creer le role superadmin ROLE_SUPER_ADMIN
+        $user = new User();
+        $user->setEmail( 'guillaume@free.com' );
+        $user->setPassword( $this->encoder->hashPassword( $user, '123456789' ) );
+        $user->setIsVerified( '1' );
+        $user->setRoles( array('ROLE_SUPER_ADMIN') );
+        $user->setFirstName( 'Guillaume' );
+        $user->setMiddleName( 'Auxioma' );
+        $user->setLastName( 'DEVAUX' );
+        $user->setMobile( '0766068003' );
+        $user->setVendor( '1' );
+        $user->setRegistredAt(new \DateTimeImmutable);
+        $user->setLastLogin(new \DateTimeImmutable);
+        $user->setIntro('1');
+        $user->setProfile('Je suis le créateur de ce site');
+
+
+
         // je vais créer une référence pour pouvoir l'utiliser dans d'autres fixtures
         $this->addReference('user_' . '0', $user);
 

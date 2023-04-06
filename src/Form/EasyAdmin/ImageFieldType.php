@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\EasyAdmin;
 
 use App\Entity\Pictures;
 use Symfony\Component\Form\AbstractType;

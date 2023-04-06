@@ -5,6 +5,7 @@ namespace App\Controller\EasyAdmin;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -21,7 +22,6 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -34,6 +34,7 @@ class UserCrudController extends AbstractCrudController
             TelephoneField::new('Mobile'),
             TextEditorField::new('Vendor')->hideOnIndex()->setFormType(CKEditorType::class),
             DateField::new('LastLogin')->onlyOnIndex(),
+            BooleanField::new('IsVerified')->onlyOnIndex(),
         ];
     }
 
@@ -41,7 +42,8 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud
             ->addFormTheme('@FOSCKEditor/form/ckeditor_widget.html.twig')
-            ->setPaginatorPageSize(10);
+            ->setPaginatorPageSize(10)
+            ->setEntityPermission('ROLE_SUPER_ADMIN');
     }
 
 }

@@ -16,7 +16,12 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i <= 10000; $i++) {
             
-            $img = rand(1, 12) . '.jpg';
+            $img = rand(1, 37);
+            if ($img < 12) {
+                $img = $img . '.jpg';
+            }  else {
+                $img = 'so'. $img . '.jpg';
+            }
 
             $Pictures = new Pictures();
             $Pictures->setAlt($faker->sentence(3));

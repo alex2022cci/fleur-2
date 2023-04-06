@@ -3,6 +3,7 @@
 namespace App\Controller\EasyAdmin;
 
 use App\Entity\Category;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
@@ -15,6 +16,12 @@ class CategoryCrudController extends AbstractCrudController
         return Category::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityPermission('ROLE_SUPER_ADMIN')
+            ;
+    }
 
     public function configureFields(string $pageName): iterable
     {

@@ -18,10 +18,6 @@ class ImageFieldType extends AbstractType
                     'multiple' => true,
                 ],
             ])
-            ->remove('updatedAt')
-            ->remove('imageSize')
-            ->remove('Alt')
-            ->remove('Product')
         ;
     }
 

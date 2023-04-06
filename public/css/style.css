@@ -6545,7 +6545,8 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 .product-badge {
   position: absolute;
   top: 15px;
-  left: 0; }
+  left: 0; 
+  z-index: 9999;}
 
 .product-badge ul {
   margin: 0;

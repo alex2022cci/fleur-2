@@ -8,9 +8,11 @@
         <div class="product-img">
             <a href="{{ path('app_product', {'Slug': product.Slug}) }}">
                 <swiper-container class="mySwiper" navigation="true">
-                    {% for ImageProduit in product.Pictures %}<swiper-slide>
-                        <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile') | imagine_filter('imageproduit') }}" alt="{{ ImageProduit.Alt}}">
-                </swiper-slide> {% endfor %}           
+                    {% for ImageProduit in product.Pictures %}
+                        <swiper-slide>
+                            <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile') | imagine_filter('imageproduit') }}" alt="{{ ImageProduit.Alt}}">
+                        </swiper-slide> 
+                    {% endfor %}           
                 </swiper-container>
             </a>
             {% if product.Discount is not null %}

@@ -48,6 +48,7 @@ class ProductRepository extends ServiceEntityRepository
             ->leftJoin('p.Pictures', 'i')
             ->andWhere('p.PublishedAt <= :now')
             ->setParameter('now', new \DateTime())
+            ->andWhere('p.Discount is not null')
             ->orderBy('p.PublishedAt', 'ASC')
             ->groupBy('p.id')
             ->setMaxResults(8)
@@ -67,7 +68,7 @@ class ProductRepository extends ServiceEntityRepository
             ->innerJoin('p.Category', 'c')
             ->andWhere('c.Slug = :slug')
             ->setParameter('slug', $slug)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.PublishedAt', 'ASC')
             ->getQuery()
             ->getResult()
             ;

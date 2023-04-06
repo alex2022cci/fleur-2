@@ -8,9 +8,9 @@
         <div class="product-img">
             <a href="{{ path('app_product', {'Slug': product.Slug}) }}">
                 <swiper-container class="mySwiper" navigation="true">
-                            {% for ImageProduit in product.Pictures %}<swiper-slide>
-                                <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile') | imagine_filter('imageproduit') }}" alt="{{ ImageProduit.Alt}}">
-                            </swiper-slide>{% endfor %}             
+                    {% for ImageProduit in product.Pictures %}<swiper-slide>
+                        <img src="{{ vich_uploader_asset(ImageProduit, 'imageFile') | imagine_filter('imageproduit') }}" alt="{{ ImageProduit.Alt}}">
+                </swiper-slide> {% endfor %}           
                 </swiper-container>
             </a>
             {% if product.Discount is not null %}
@@ -55,11 +55,11 @@
             </h2>
             <div class="product-price">
                 {% if product.Discount is null %}
-                    <span>${{ product.Price }}</span>
+                    <span>${{ product.Price |format_currency('EUR', {rounding_mode: 'floor'})  }}</span>
                 {% endif %}
                 {% if product.Discount is not null %}
                     <span>${{ product.Price - (product.Price * product.Discount / 100) }}</span>
-                    <del>{{ product.Price }}</del>
+                    <del>{{ product.Price |format_currency('EUR', {rounding_mode: 'floor'})  }}</del>
                 {% endif %}
             </div>
         </div>

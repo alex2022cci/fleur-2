@@ -31,13 +31,15 @@
                     <div class="ltn__shop-details-inner">
                         <div class="row">
                             <div class="col-md-6">
+                            {#% for produit in product  %#}
                                 <div class="ltn__shop-details-img-gallery ltn__shop-details-img-gallery-2">
                                     <div class="ltn__shop-details-small-img slick-arrow-2">
                                         <div class="single-small-img">
-                                            <img src="img/product/1.png" alt="Image">
+                                       
+                                            <img src=" vich_uploader_asset{{ produit.Title  }}" alt="{{ produit.SKU}}">
                                         </div>
                                         <div class="single-small-img">
-                                            <img src="img/product/2.png" alt="Image">
+                                            <img src="vich_uploader_asset{{ produit.Title }}" alt="{{ produit.Title}}">
                                         </div>
                                         <div class="single-small-img">
                                             <img src="img/product/3.png" alt="Image">
@@ -93,15 +95,16 @@
                                         </div>
                                     </div>
                                 </div>
+                            {#% endfor %#} 
                             </div>
                             <div class="col-md-6">
                                 <div class="modal-product-info shop-details-info pl-0">
-                                    <h3>Pink Flower Tree Red</h3>
+                                    <h3>{{produit.Title}}</h3>
                                     <div class="product-price-ratting mb-20">
                                         <ul>
                                             <li>
                                                 <div class="product-price">
-                                                    <span>$49.00</span>
+                                                    <span>$ {{produit.Price}}</span>
                                                     <del>$65.00</del>
                                                 </div>
                                             </li>
@@ -120,7 +123,7 @@
                                         </ul>
                                     </div>
                                     <div class="modal-product-brief">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos repellendus repudiandae incidunt quidem pariatur expedita, quo quis modi tempore non.</p>
+                                        <p>{{produit.Summary}}</p>
                                     </div>
                                     <div class="modal-product-meta ltn__product-details-menu-1 mb-20">
                                         <ul>
@@ -137,18 +140,7 @@
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="ltn__size-widget clearfix mt-25">
-                                                    <strong class="d-meta-title">Size</strong>
-                                                    <ul>
-                                                        <li><a href="#">S</a></li>
-                                                        <li><a href="#">M</a></li>
-                                                        <li><a href="#">L</a></li>
-                                                        <li><a href="#">XL</a></li>
-                                                        <li><a href="#">XXL</a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
+                                      
                                         </ul>
                                     </div>
                                     <div class="ltn__product-details-menu-2 product-cart-wishlist-btn mb-30">
@@ -182,11 +174,11 @@
                                     </div>
                                     <div class="modal-product-meta ltn__product-details-menu-1 mb-30">
                                         <ul>
-                                            <li><strong>SKU:</strong> <span>12345</span></li>
+                                            <li><strong>SKU:</strong> <span>{{produit.SKU}}</span></li>
                                             <li>
                                                 <strong>Categories:</strong>
                                                 <span>
-                                                    <a href="#">Flower</a>
+                                                    <a href="#">{{produit.Category}}</a>
                                                 </span>
                                             </li>
                                             <li>

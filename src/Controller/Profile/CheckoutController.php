@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ChekoutController extends AbstractController
+class CheckoutController extends AbstractController
 {
     private AddtocartServices $AddtocartServices;
     private StripeServives $StripeServives;
@@ -31,7 +31,7 @@ class ChekoutController extends AbstractController
         $this->StripeServives = $StripeServives;
     }
 
-    #[Route('/profile/chekout', name: 'profile_chekout')]
+    #[Route('/profile/checkout', name: 'profile_checkout')]
     #[isGranted('ROLE_USER')]
     public function index(Request $request, EntityManagerInterface $em, UserRepository $user): Response
     {
@@ -48,7 +48,7 @@ class ChekoutController extends AbstractController
             return $this->redirectToRoute('profile_paiement');
         }
 
-        return $this->render('profile/chekout/index.html.twig', [
+        return $this->render('profile/checkout/index.html.twig', [
             'Order' => $form->createView(),
         ]);
     }
@@ -78,7 +78,7 @@ class ChekoutController extends AbstractController
 
         }
 
-        return $this->render('profile/chekout/paiement.html.twig', [
+        return $this->render('profile/checkout/paiement.html.twig', [
             'items' => $this->AddtocartServices->getFullCart(),
             'total' => $this->AddtocartServices->getTotal(),
             'form' => $form->createView(),
@@ -129,7 +129,7 @@ class ChekoutController extends AbstractController
             throw $e;
         }
 
-         return $this->render('profile/chekout/paiement_success.html.twig', [
+         return $this->render('profile/checkout/paiement_success.html.twig', [
             'total' => $this->AddtocartServices->getTotal()
         ]);
     }
@@ -138,6 +138,6 @@ class ChekoutController extends AbstractController
     #[isGranted('ROLE_USER')]
     public function cancel_url(): Response
     {
-        return $this->render('profile/chekout/paiement_cancel.html.twig');
+        return $this->render('profile/checkout/paiement_cancel.html.twig');
     }
 }
